@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/consultar" android:title="Consultar"
+    android:icon="@drawable/home_account"/>
+    <item android:id="@+id/Agregar" android:title="Agregar"
+        android:icon="@drawable/tab_plus"/>
+    <item android:id="@+id/Editar" android:title="Editar"
+        android:icon="@drawable/file_edit"/>
+    <item android:id="@+id/Eliminar" android:title="Eliminar"
+        android:icon="@drawable/delete_circle"/>
+    <item android:id="@+id/Logout" android:title="Logout"
+        android:icon="@drawable/logout"/>
+</menu>
