@@ -1,14 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_consulta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F4F6"
     tools:context=".Op_Consultar">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Cabecera -->
+    <LinearLayout
+        android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Ventanad de Conulta" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#3F51B5"
+        android:padding="16dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvTituloConsulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuarios Registrados"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Encabezado de tabla -->
+    <LinearLayout
+        android:id="@+id/layoutEncabezadoTabla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_layout"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4"
+        android:background="#D3D3D3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ID"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Usuario"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Contraseña"
+            android:textStyle="bold"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Botón Limpiar -->
+    <Button
+        android:id="@+id/btnLimpiar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limpiar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FF4081"
+        android:textColor="#FFFFFF"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp" />
+
+    <!-- Lista de usuarios -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/btnLimpiar"
+        android:layout_below="@id/layoutEncabezadoTabla"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+</RelativeLayout>
+
