@@ -1,7 +1,5 @@
 package com.example.aplicacioncrud
 
-import com.example.aplicacioncrud.ApiClient
-import com.example.aplicacioncrud.ApiService
 import com.example.aplicacioncrud.LoginResponse
 import android.content.Intent
 import android.os.Bundle
