@@ -25,7 +25,10 @@ class Login : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
+
             val usuario = etUsuario.text.toString().trim()
+
+            val usuario2 = etUsuario.text.toString().trim()
             val contrasena = etContrasena.text.toString().trim()
 
             if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
