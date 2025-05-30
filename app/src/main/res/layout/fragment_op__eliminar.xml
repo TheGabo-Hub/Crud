@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="173dp" />
+        app:layout_constraintGuide_begin="141dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="326dp" />
+        app:layout_constraintGuide_begin="257dp" />
 
     <Button
         android:id="@+id/bDelBuscar"
@@ -160,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="666dp" />
+        app:layout_constraintGuide_begin="547dp" />
 
     <Button
         android:id="@+id/bDelEliminar"
@@ -193,6 +193,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="807dp" />
+        app:layout_constraintGuide_begin="739dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
