@@ -1,6 +1,5 @@
 package com.example.aplicacioncrud
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -23,9 +22,8 @@ class Login : AppCompatActivity() {
         val etUsuario = findViewById<EditText>(R.id.txtUsuario)
         val etContrasena = findViewById<EditText>(R.id.txtPassword)
         val btnLogin = findViewById<Button>(R.id.btnEntrar)
-        val btnRegistrarse = findViewById<Button>(R.id.btnRegistrarse)
 
-        // Aqui es la accion que va atomar el boton cuando se le de click
+
         btnLogin.setOnClickListener {
 
             val usuario = etUsuario.text.toString().trim()
@@ -36,17 +34,10 @@ class Login : AppCompatActivity() {
             if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
                 iniciarSesion(usuario, contrasena)
             } else {
-               Toast.makeText(this@Login, "⚠️ Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Login, "⚠️ Completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
-        btnRegistrarse.setOnClickListener {
-            val intent = Intent(this@Login, Op_Insertar::class.java)
-            startActivity(intent)
-        }
     }
-
-
-
 
     private fun iniciarSesion(usuario: String, contrasena: String) {
         val url = HttpUrl.Builder()
@@ -97,3 +88,4 @@ class Login : AppCompatActivity() {
         }
     }
 }
+
