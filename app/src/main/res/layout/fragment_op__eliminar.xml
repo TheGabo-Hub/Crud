@@ -9,7 +9,7 @@
     tools:context=".Op_Eliminar">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Altas"
         android:layout_width="409dp"
         android:layout_height="53dp"
         android:background="#84AAF0"
@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Altas" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
