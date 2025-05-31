@@ -2,11 +2,7 @@ package com.example.aplicacioncrud
 
 import android.content.Intent // <-- IMPORTANTE
 import android.os.Bundle
-<<<<<<< HEAD
-import android.widget.Button
-=======
 import android.view.View
->>>>>>> 59ade810278d3cb5370ca0a58d1961a77696d526
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -27,21 +23,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-<<<<<<< HEAD
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        btnLogin.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-}
-=======
         var drawerLayout=findViewById<DrawerLayout>(R.id.drawellayout)
         var tollbar=findViewById<MaterialToolbar>(R.id.tollbar)
         val navigationView = findViewById<NavigationView>(R.id.navigation)
@@ -72,4 +54,3 @@ class MainActivity : AppCompatActivity() {
             .commit()
         }
     }
->>>>>>> 59ade810278d3cb5370ca0a58d1961a77696d526

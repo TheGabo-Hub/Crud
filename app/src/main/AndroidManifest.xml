@@ -15,10 +15,6 @@
         android:theme="@style/Theme.AplicacionCrud"
         tools:targetApi="31" >
         <activity
-            android:name=".Op_Eliminar"
-            android:exported="false"
-            android:theme="@style/Theme.AplicacionCrud" />
-        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
