@@ -1,59 +1,144 @@
 package com.example.aplicacioncrud
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.Fragment
+import kotlinx.coroutines.*
+import okhttp3.*
+import org.json.JSONObject
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Op_Eliminar.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Op_Eliminar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_op__eliminar, container, false)
+        val view = inflater.inflate(R.layout.fragment_op__eliminar, container, false)
+
+        val etBuscarID = view.findViewById<EditText>(R.id.delBuscaID)
+        val txtID = view.findViewById<TextView>(R.id.delID)
+        val txtNombre = view.findViewById<TextView>(R.id.delNombre)
+        val txtUser = view.findViewById<TextView>(R.id.delUser)
+        val txtPassword = view.findViewById<TextView>(R.id.delPassword)
+
+        val btnBuscar = view.findViewById<Button>(R.id.bDelBuscar)
+        val btnEliminar = view.findViewById<Button>(R.id.bDelEliminar)
+        val btnLimpiar = view.findViewById<Button>(R.id.bDelLimpiar)
+
+        btnBuscar.setOnClickListener {
+            val id = etBuscarID.text.toString().trim()
+            if (id.isNotEmpty()) {
+                buscarUsuario(id, txtID, txtNombre, txtUser, txtPassword)
+            } else {
+                Toast.makeText(requireContext(), "⚠️ Ingresa un ID", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnEliminar.setOnClickListener {
+            val id = txtID.text.toString()
+            if (id.isNotEmpty()) {
+                eliminarUsuario(id) {
+                    // Limpiar campos si se eliminó
+                    txtID.text = ""
+                    txtNombre.text = ""
+                    txtUser.text = ""
+                    txtPassword.text = ""
+                    etBuscarID.setText("")
+                }
+            } else {
+                Toast.makeText(requireContext(), "⚠️ Busca un usuario primero", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnLimpiar.setOnClickListener {
+            etBuscarID.setText("")
+            txtID.text = ""
+            txtNombre.text = ""
+            txtUser.text = ""
+            txtPassword.text = ""
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Op_Eliminar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Op_Eliminar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun buscarUsuario(id: String, txtID: TextView, txtNombre: TextView, txtUser: TextView, txtPassword: TextView) {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("74.207.235.149") // Cambia si usas otro host
+            .addPathSegment("buscar_usuario.php")
+            .addQueryParameter("id", id)
+            .build()
+
+        val request = Request.Builder().url(url).get().build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && responseBody != null) {
+                        val json = JSONObject(responseBody)
+                        if (json.optBoolean("success", false)) {
+                            val usuario = json.getJSONObject("usuario")
+                            txtID.text = usuario.optString("id", "")
+                            txtNombre.text = usuario.optString("nombre", "")
+                            txtUser.text = usuario.optString("usuario", "")
+                            txtPassword.text = usuario.optString("password", "")
+                        } else {
+                            Toast.makeText(requireContext(), "❌ Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+    }
+
+    private fun eliminarUsuario(id: String, onSuccess: () -> Unit) {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("74.207.235.149") // Cambia si usas otro host
+            .addPathSegment("eliminar_usuario.php")
+            .addQueryParameter("id", id)
+            .build()
+
+        val request = Request.Builder().url(url).get().build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && responseBody != null) {
+                        val json = JSONObject(responseBody)
+                        val mensaje = json.optString("mensaje", "Sin mensaje")
+                        if (json.optBoolean("success", false)) {
+                            Toast.makeText(requireContext(), "🗑️ $mensaje", Toast.LENGTH_SHORT).show()
+                            onSuccess()
+                        } else {
+                            Toast.makeText(requireContext(), "❌ $mensaje", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }

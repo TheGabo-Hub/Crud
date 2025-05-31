@@ -1,72 +1,98 @@
 package com.example.aplicacioncrud
 
-import com.example.aplicacioncrud.ApiClient
-import com.example.aplicacioncrud.ApiService
-import com.example.aplicacioncrud.LoginResponse
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.*
+import okhttp3.*
+import org.json.JSONObject
+import java.io.IOException
 
 class Login : AppCompatActivity() {
+    private val client = OkHttpClient()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Ajuste de insets visuales
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val etUsuario = findViewById<EditText>(R.id.txtUsuario)
+        val etContrasena = findViewById<EditText>(R.id.txtPassword)
+        val btnLogin = findViewById<Button>(R.id.btnEntrar)
+
+
+        btnLogin.setOnClickListener {
+
+            val usuario = etUsuario.text.toString().trim()
+
+
+            val contrasena = etContrasena.text.toString().trim()
+
+            if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
+                iniciarSesion(usuario, contrasena)
+            } else {
+                Toast.makeText(this@Login, "⚠️ Completa todos los campos", Toast.LENGTH_SHORT).show()
+            }
+        }
+        val btnRegistrarse = findViewById<TextView>(R.id.btnRegistrarse)
+        btnRegistrarse.setOnClickListener {
+            val intent = Intent(this@Login, ContenedorActivity::class.java)
+            startActivity(intent)
         }
 
-        // Referencias a los elementos de la vista
-        val usuarioEditText = findViewById<EditText>(R.id.txtUsuario)
-        val contraEditText = findViewById<EditText>(R.id.txtPassword)
-        val btnIniciar = findViewById<Button>(R.id.btnEntrar)
 
-        btnIniciar.setOnClickListener {
-            val usuario = usuarioEditText.text.toString()
-            val contra = contraEditText.text.toString()
+    }
 
-            if (usuario.isEmpty() || contra.isEmpty()) {
-                Toast.makeText(this, "Por favor, completa los campos", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+    private fun iniciarSesion(usuario: String, contrasena: String) {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("74.207.235.149") // O tu dominio real
+            .addPathSegment("login.php")
+            .addQueryParameter("usuario", usuario)
+            .addQueryParameter("contrasena", contrasena)
+            .build()
 
-            val call = ApiClient.apiService.loginUser(usuario, contra)
-            call.enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        if (body?.success == true) {
-                            Toast.makeText(this@Login, "Bienvenido ${body.nombre}", Toast.LENGTH_LONG).show()
-                            // Ir a otra pantalla
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                if (response.isSuccessful && responseBody != null) {
+                    val json = JSONObject(responseBody)
+                    val exito = json.optBoolean("success", false)
+                    val mensaje = json.optString("mensaje", "Sin mensaje")
+
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@Login, mensaje, Toast.LENGTH_SHORT).show()
+
+                        if (exito) {
+                            Toast.makeText(this@Login, "🎉 Acceso correcto", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@Login, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this@Login, body?.mensaje ?: "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Login, "🚫 Acceso denegado", Toast.LENGTH_SHORT).show()
                         }
-                    } else {
-                        Toast.makeText(this@Login, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@Login, "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
                     }
                 }
-
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Toast.makeText(this@Login, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@Login, "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
                 }
-            })
+            }
         }
     }
 }
+

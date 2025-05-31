@@ -1,59 +1,82 @@
 package com.example.aplicacioncrud
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.Fragment
+import kotlinx.coroutines.*
+import okhttp3.*
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Op_Insertar.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Op_Insertar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_op__insertar, container, false)
+        val view = inflater.inflate(R.layout.fragment_op__insertar, container, false)
+
+        val txtNombre = view.findViewById<EditText>(R.id.txtNombre)
+        val txtUsuario = view.findViewById<EditText>(R.id.txtUsuario)
+        val txtPassword = view.findViewById<EditText>(R.id.txtPassword)
+        val btnRegistrar = view.findViewById<Button>(R.id.btnregistrar)
+        val btnLimpiar = view.findViewById<Button>(R.id.btnlimpiar)
+
+        btnRegistrar.setOnClickListener {
+            val nombre = txtNombre.text.toString().trim()
+            val usuario = txtUsuario.text.toString().trim()
+            val password = txtPassword.text.toString().trim()
+
+            if (nombre.isNotEmpty() && usuario.isNotEmpty() && password.isNotEmpty()) {
+                registrarUsuario(nombre, usuario, password)
+            } else {
+                Toast.makeText(requireContext(), "⚠️ Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnLimpiar.setOnClickListener {
+            txtNombre.text.clear()
+            txtUsuario.text.clear()
+            txtPassword.text.clear()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Op_Insertar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Op_Insertar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun registrarUsuario(nombre: String, usuario: String, password: String) {
+        val url = "http://74.207.235.149/registrar.php" // Cambia si usas dominio propio
+
+        val formBody = FormBody.Builder()
+            .add("nombre", nombre)
+            .add("usuario", usuario)
+            .add("contrasena", password)
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && responseBody != null) {
+                        Toast.makeText(requireContext(), responseBody, Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error en el servidor", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+        }
     }
 }

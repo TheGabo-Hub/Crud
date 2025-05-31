@@ -1,6 +1,5 @@
 package com.example.aplicacioncrud
 
-import android.content.Intent // <-- IMPORTANTE
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -10,20 +9,25 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.aplicacioncrud.databinding.ActivityMainBinding
+//import com.example.aplicacioncrud.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-    private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
+
+//    private val binding by lazy{
+//        ActivityMainBinding.inflate(layoutInflater)
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
         var drawerLayout=findViewById<DrawerLayout>(R.id.drawellayout)
         var tollbar=findViewById<MaterialToolbar>(R.id.tollbar)
         val navigationView = findViewById<NavigationView>(R.id.navigation)
@@ -52,5 +56,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+<<<<<<< HEAD
         }
     }
+=======
+    }
+}
+>>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
