@@ -28,7 +28,7 @@ class Login : AppCompatActivity() {
 
             val usuario = etUsuario.text.toString().trim()
 
-            val usuario2 = etUsuario.text.toString().trim()
+
             val contrasena = etContrasena.text.toString().trim()
 
             if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
@@ -37,6 +37,13 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this@Login, "⚠️ Completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+        val btnRegistrarse = findViewById<TextView>(R.id.btnRegistrarse)
+        btnRegistrarse.setOnClickListener {
+            val intent = Intent(this@Login, ContenedorActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun iniciarSesion(usuario: String, contrasena: String) {
