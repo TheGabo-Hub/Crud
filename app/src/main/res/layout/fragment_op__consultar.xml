@@ -88,9 +88,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewConsulta"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@id/btnLimpiar"
+        android:layout_height="match_parent"
         android:layout_below="@id/layoutEncabezadoTabla"
+        android:layout_above="@id/btnLimpiar"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="39dp"
         android:clipToPadding="false"

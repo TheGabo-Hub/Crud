@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="#FFFFFF"
+    android:weightSum="4">
+
+    <TextView
+        android:id="@+id/txtItemID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/txtItemNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Gabriel"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/txtItemUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="admin"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/txtItemPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1234"
+        android:gravity="center" />
+</LinearLayout>
