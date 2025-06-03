@@ -18,7 +18,7 @@ class Op_editar : Fragment() {
     private lateinit var etBuscarID: EditText
     private lateinit var etID: TextView
     private lateinit var etNombre: TextView
-    private lateinit var etUser: TextView
+    private lateinit var etStock: TextView
     private lateinit var etPassword: TextView
 
     override fun onCreateView(
@@ -28,11 +28,11 @@ class Op_editar : Fragment() {
         val view = inflater.inflate(R.layout.fragment_op_editar, container, false)
 
         // Inicializar campos de texto
-        etBuscarID = view.findViewById(R.id.delBuscaID)
-        etID = view.findViewById(R.id.delID)
-        etNombre = view.findViewById(R.id.delNombre)
-        etUser = view.findViewById(R.id.delUser)
-        etPassword = view.findViewById(R.id.delPassword)
+        etBuscarID = view.findViewById(R.id.txtIdProducto)
+        etID = view.findViewById(R.id.txtID)
+        etNombre = view.findViewById(R.id.txtNombre)
+        etStock = view.findViewById(R.id.txtStock)
+        etPassword = view.findViewById(R.id.txtPrecio)
 
         val btnBuscar = view.findViewById<Button>(R.id.bDelBuscar)
         val btnActualizar = view.findViewById<Button>(R.id.bDelEliminar)
@@ -42,7 +42,7 @@ class Op_editar : Fragment() {
         btnBuscar.setOnClickListener {
             val id = etBuscarID.text.toString().trim()
             if (id.isNotEmpty()) {
-                buscarUsuario(id, etID, etNombre, etUser, etPassword)
+                buscarUsuario(id, etID, etNombre, etStock, etPassword)
             } else {
                 Toast.makeText(requireContext(), "⚠️ Ingresa un ID", Toast.LENGTH_SHORT).show()
             }
@@ -52,7 +52,7 @@ class Op_editar : Fragment() {
         btnActualizar.setOnClickListener {
             val id = etID.text.toString()
             val nombre = etNombre.text.toString()
-            val usuario = etUser.text.toString()
+            val usuario = etStock.text.toString()
             val contrasena = etPassword.text.toString()
 
             if (id.isNotEmpty() && nombre.isNotEmpty() && usuario.isNotEmpty() && contrasena.isNotEmpty()) {
@@ -72,10 +72,10 @@ class Op_editar : Fragment() {
 
     // Función para limpiar todos los campos
     private fun limpiarCampos() {
-        etBuscarID.setText("")
+        etBuscarID.text.clear()
         etID.text = ""
         etNombre.text = ""
-        etUser.text = ""
+        etStock.text = ""
         etPassword.text = ""
     }
 
