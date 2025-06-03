@@ -42,7 +42,7 @@ class Op_editar : Fragment() {
         btnBuscar.setOnClickListener {
             val id = etBuscarID.text.toString().trim()
             if (id.isNotEmpty()) {
-                buscarUsuario(id, etID, etNombre, etStock, etPassword)
+                buscarProducto(id, etID, etNombre, etStock, etPassword)
             } else {
                 Toast.makeText(requireContext(), "⚠️ Ingresa un ID", Toast.LENGTH_SHORT).show()
             }
@@ -52,11 +52,11 @@ class Op_editar : Fragment() {
         btnActualizar.setOnClickListener {
             val id = etID.text.toString()
             val nombre = etNombre.text.toString()
-            val usuario = etStock.text.toString()
-            val contrasena = etPassword.text.toString()
+            val stock = etStock.text.toString()
+            val precio = etPassword.text.toString()
 
-            if (id.isNotEmpty() && nombre.isNotEmpty() && usuario.isNotEmpty() && contrasena.isNotEmpty()) {
-                actualizarUsuario(id, nombre, usuario, contrasena)
+            if (id.isNotEmpty() && nombre.isNotEmpty() && stock.isNotEmpty() && precio.isNotEmpty()) {
+                actualizarProducto(id.toInt(), nombre, stock.toInt(), precio.toDouble())
             } else {
                 Toast.makeText(requireContext(), "⚠️ Rellena todos los campos", Toast.LENGTH_SHORT).show()
             }
@@ -80,18 +80,24 @@ class Op_editar : Fragment() {
     }
 
     // Función para buscar un usuario
-    private fun buscarUsuario(id: String, etID: TextView, etNombre: TextView, etUser: TextView, etPassword: TextView) {
+    private fun buscarProducto(id: String, txtID: TextView, txtNombre: TextView, txtStock: TextView, txtPrecio: TextView) {
+        // construye la URL con los parámetros
+
+        // http://74.207.235.149/buscar_producto?id=1
         val url = HttpUrl.Builder()
             .scheme("http")
-            .host("74.207.235.149")
-            .addPathSegment("buscar_usuario.php")
+            .host("74.207.235.149") // Cambia si usas otro host
+            .addPathSegment("buscar_producto.php")
             .addQueryParameter("id", id)
             .build()
 
+        // crea la solicitud
         val request = Request.Builder().url(url).get().build()
+        // lanza la corrutina
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                // ejecuta la solicitud
                 val response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
 
@@ -99,13 +105,15 @@ class Op_editar : Fragment() {
                     if (response.isSuccessful && responseBody != null) {
                         val json = JSONObject(responseBody)
                         if (json.optBoolean("success", false)) {
-                            val usuario = json.getJSONObject("usuario")
-                            etID.text = usuario.optString("id", "")
-                            etNombre.text = usuario.optString("nombre", "")
-                            etUser.text = usuario.optString("usuario", "")
-                            etPassword.text = usuario.optString("contrasena", "")
+                            val usuario = json.getJSONObject("producto")
+                            // Actualiza los TextView con los datos del usuario
+                            // ----------------------------> EL NOMBRE DELA COLUMNA
+                            txtID.text = usuario.optString("id", "")
+                            txtNombre.text = usuario.optString("nombre", "")
+                            txtStock.text = usuario.optString("stock", "")
+                            txtPrecio.text = usuario.optString("precio", "")
                         } else {
-                            Toast.makeText(requireContext(), "❌ Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "❌ Producto no encontrado", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(requireContext(), "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
@@ -118,20 +126,19 @@ class Op_editar : Fragment() {
             }
         }
     }
-
     // Función para actualizar los datos de un usuario
-    private fun actualizarUsuario(id: String, nombre: String, usuario: String, contrasena: String) {
+    private fun actualizarProducto(id: Int, nombre: String, stock: Int, precio: Double) {
         val url = HttpUrl.Builder()
             .scheme("http")
             .host("74.207.235.149")
-            .addPathSegment("editar_usuario.php")
+            .addPathSegment("editar_producto.php")
             .build()
 
         val formBody = FormBody.Builder()
-            .add("id", id)
+            .add("id", id.toString())
             .add("nombre", nombre)
-            .add("usuario", usuario)
-            .add("contrasena", contrasena)
+            .add("stock", stock.toString())
+            .add("precio", precio.toString())
             .build()
 
         val request = Request.Builder()

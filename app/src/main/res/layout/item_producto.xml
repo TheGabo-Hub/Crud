@@ -31,7 +31,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtItemUsuario"
+        android:id="@+id/txtItemStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -43,7 +43,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtItemPassword"
+        android:id="@+id/txtItemPrecio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

@@ -18,22 +18,26 @@ class Op_Eliminar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // desde este fragment va a relacionar las variables con el layout
         val view = inflater.inflate(R.layout.fragment_op__eliminar, container, false)
-
+        // variables creadas ya relacionadas
         val etBuscarID = view.findViewById<EditText>(R.id.txtIdProducto)
         val txtID = view.findViewById<TextView>(R.id.txtID)
         val txtNombre = view.findViewById<TextView>(R.id.txtNombre)
-        val txtUser = view.findViewById<TextView>(R.id.txtStock)
-        val txtPassword = view.findViewById<TextView>(R.id.txtPrecio)
+        val txtStock = view.findViewById<TextView>(R.id.txtStock)
+        val txtPrecio = view.findViewById<TextView>(R.id.txtPrecio)
 
         val btnBuscar = view.findViewById<Button>(R.id.bDelBuscar)
         val btnEliminar = view.findViewById<Button>(R.id.bDelEliminar)
         val btnLimpiar = view.findViewById<Button>(R.id.bDelLimpiar)
 
+        // Botón para buscar
         btnBuscar.setOnClickListener {
+            //
             val id = etBuscarID.text.toString().trim()
             if (id.isNotEmpty()) {
-                buscarUsuario(id, txtID, txtNombre, txtUser, txtPassword)
+                // Llama a la función para buscar el usuario
+                buscarProducto(id, txtID, txtNombre, txtStock, txtPrecio)
             } else {
                 Toast.makeText(requireContext(), "⚠️ Ingresa un ID", Toast.LENGTH_SHORT).show()
             }
@@ -42,16 +46,16 @@ class Op_Eliminar : Fragment() {
         btnEliminar.setOnClickListener {
             val id = txtID.text.toString()
             if (id.isNotEmpty()) {
-                eliminarUsuario(id) {
+                eliminarProducto (id) {
                     // Limpiar campos si se eliminó
                     txtID.text = ""
                     txtNombre.text = ""
-                    txtUser.text = ""
-                    txtPassword.text = ""
+                    txtStock.text = ""
+                    txtPrecio.text = ""
                     etBuscarID.setText("")
                 }
             } else {
-                Toast.makeText(requireContext(), "⚠️ Busca un usuario primero", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "⚠️ Busca un producto primero", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -59,25 +63,31 @@ class Op_Eliminar : Fragment() {
             etBuscarID.setText("")
             txtID.text = ""
             txtNombre.text = ""
-            txtUser.text = ""
-            txtPassword.text = ""
+            txtStock.text = ""
+            txtPrecio.text = ""
         }
 
         return view
     }
 
-    private fun buscarUsuario(id: String, txtID: TextView, txtNombre: TextView, txtUser: TextView, txtPassword: TextView) {
+    private fun buscarProducto(id: String, txtID: TextView, txtNombre: TextView, txtStock: TextView, txtPrecio: TextView) {
+        // construye la URL con los parámetros
+
+        // http://74.207.235.149/buscar_producto?id=1
         val url = HttpUrl.Builder()
             .scheme("http")
             .host("74.207.235.149") // Cambia si usas otro host
-            .addPathSegment("buscar_usuario.php")
+            .addPathSegment("buscar_producto.php")
             .addQueryParameter("id", id)
             .build()
 
+        // crea la solicitud
         val request = Request.Builder().url(url).get().build()
+        // lanza la corrutina
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                // ejecuta la solicitud
                 val response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
 
@@ -85,11 +95,13 @@ class Op_Eliminar : Fragment() {
                     if (response.isSuccessful && responseBody != null) {
                         val json = JSONObject(responseBody)
                         if (json.optBoolean("success", false)) {
-                            val usuario = json.getJSONObject("usuario")
+                            val usuario = json.getJSONObject("producto")
+                            // Actualiza los TextView con los datos del usuario
+                            // ----------------------------> EL NOMBRE DELA COLUMNA
                             txtID.text = usuario.optString("id", "")
                             txtNombre.text = usuario.optString("nombre", "")
-                            txtUser.text = usuario.optString("usuario", "")
-                            txtPassword.text = usuario.optString("contrasena", "")
+                            txtStock.text = usuario.optString("stock", "")
+                            txtPrecio.text = usuario.optString("precio", "")
                         } else {
                             Toast.makeText(requireContext(), "❌ Usuario no encontrado", Toast.LENGTH_SHORT).show()
                         }
@@ -105,14 +117,15 @@ class Op_Eliminar : Fragment() {
         }
     }
 
-    private fun eliminarUsuario(id: String, onSuccess: () -> Unit) {
+    private fun eliminarProducto(id: String, onSuccess: () -> Unit) {
+
         val url = HttpUrl.Builder()
             .scheme("http")
             .host("74.207.235.149") // Cambia si usas otro host
-            .addPathSegment("eliminar_usuario.php")
+            .addPathSegment("eliminar_producto.php")
             .addQueryParameter("id", id)
             .build()
-
+        // crea la solicitud
         val request = Request.Builder().url(url).get().build()
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -120,6 +133,7 @@ class Op_Eliminar : Fragment() {
                 val response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
 
+                //
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && responseBody != null) {
                         val json = JSONObject(responseBody)

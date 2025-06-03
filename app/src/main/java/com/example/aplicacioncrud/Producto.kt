@@ -1,7 +1,7 @@
 package com.example.aplicacioncrud
-data class Usuario(
+data class Producto(
     val id: String,
     val nombre: String,
-    val usuario: String,
-    val contrasena: String
+    val stock: Int,
+    val precio: Double
 )

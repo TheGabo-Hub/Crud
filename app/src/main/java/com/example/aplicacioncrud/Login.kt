@@ -39,7 +39,8 @@ class Login : AppCompatActivity() {
         }
         val btnRegistrarse = findViewById<TextView>(R.id.btnRegistrarse)
         btnRegistrarse.setOnClickListener {
-            val intent = Intent(this@Login, ContenedorActivity::class.java)
+            val intent = Intent(this@Login, AltaUsuario::class.java)
+
             startActivity(intent)
         }
 
@@ -50,7 +51,7 @@ class Login : AppCompatActivity() {
         val url = HttpUrl.Builder()
             .scheme("http")
             .host("74.207.235.149") // O tu dominio real
-            .addPathSegment("login.php")
+            .addPathSegment("login2.php")
             .addQueryParameter("usuario", usuario)
             .addQueryParameter("contrasena", contrasena)
             .build()

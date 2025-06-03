@@ -16,13 +16,14 @@ import java.io.IOException
 
 class Op_Consultar : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: UsuarioAdapter
+    private lateinit var adapter: ProductoAdapter
     private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_op__consultar, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewConsulta)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -31,14 +32,14 @@ class Op_Consultar : Fragment() {
 
         val btnLimpiar = view.findViewById<Button>(R.id.btnLimpiar)
         btnLimpiar.setOnClickListener {
-            recyclerView.adapter = UsuarioAdapter(emptyList())
+            recyclerView.adapter = ProductoAdapter(emptyList())
         }
 
         return view
     }
 
     private fun consultarUsuarios() {
-        val url = "http://74.207.235.149/mostrar_usuarios.php"
+        val url = "http://74.207.235.149/mostrar_productos.php"
 
         val request = Request.Builder().url(url).get().build()
 
@@ -51,20 +52,20 @@ class Op_Consultar : Fragment() {
                     if (response.isSuccessful && responseBody != null) {
                         val json = JSONObject(responseBody)
                         if (json.optBoolean("success", false)) {
-                            val listaUsuarios = mutableListOf<Usuario>()
-                            val usuarios = json.getJSONArray("usuarios")
+                            val listaProductos = mutableListOf<Producto>()
+                            val usuarios = json.getJSONArray("productos")
                             for (i in 0 until usuarios.length()) {
                                 val u = usuarios.getJSONObject(i)
-                                listaUsuarios.add(
-                                    Usuario(
+                                listaProductos.add(
+                                    Producto(
                                         u.getString("id"),
                                         u.getString("nombre"),
-                                        u.getString("usuario"),
-                                        u.getString("contrasena")
+                                        u.getInt("stock"),
+                                        u.getDouble("precio")
                                     )
                                 )
                             }
-                            adapter = UsuarioAdapter(listaUsuarios)
+                            adapter = ProductoAdapter(listaProductos)
                             recyclerView.adapter = adapter
                         } else {
                             Toast.makeText(requireContext(), "❌ Sin registros", Toast.LENGTH_SHORT).show()
