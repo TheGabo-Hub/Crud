@@ -89,7 +89,7 @@ class Op_Eliminar : Fragment() {
                             txtID.text = usuario.optString("id", "")
                             txtNombre.text = usuario.optString("nombre", "")
                             txtUser.text = usuario.optString("usuario", "")
-                            txtPassword.text = usuario.optString("password", "")
+                            txtPassword.text = usuario.optString("contrasena", "")
                         } else {
                             Toast.makeText(requireContext(), "❌ Usuario no encontrado", Toast.LENGTH_SHORT).show()
                         }

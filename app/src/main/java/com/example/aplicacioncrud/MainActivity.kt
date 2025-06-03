@@ -1,5 +1,6 @@
 package com.example.aplicacioncrud
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -39,7 +40,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.Agregar -> replaceFragment(Op_Insertar())
                 R.id.Editar -> replaceFragment(Op_editar())
                 R.id.Eliminar -> replaceFragment(Op_Eliminar())
-                R.id.Logout -> finish()
+                R.id.Logout -> { val intent = Intent(this, Login::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)}
 
             }
             drawerLayout.closeDrawer(GravityCompat.START)

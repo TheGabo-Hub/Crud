@@ -1,59 +1,168 @@
 package com.example.aplicacioncrud
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.Fragment
+import kotlinx.coroutines.*
+import okhttp3.*
+import org.json.JSONObject
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Op_editar.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Op_editar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val client = OkHttpClient()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // Declarar variables globales para poder usarlas en cualquier función
+    private lateinit var etBuscarID: EditText
+    private lateinit var etID: TextView
+    private lateinit var etNombre: TextView
+    private lateinit var etUser: TextView
+    private lateinit var etPassword: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_op_editar, container, false)
+        val view = inflater.inflate(R.layout.fragment_op_editar, container, false)
+
+        // Inicializar campos de texto
+        etBuscarID = view.findViewById(R.id.delBuscaID)
+        etID = view.findViewById(R.id.delID)
+        etNombre = view.findViewById(R.id.delNombre)
+        etUser = view.findViewById(R.id.delUser)
+        etPassword = view.findViewById(R.id.delPassword)
+
+        val btnBuscar = view.findViewById<Button>(R.id.bDelBuscar)
+        val btnActualizar = view.findViewById<Button>(R.id.bDelEliminar)
+        val btnLimpiar = view.findViewById<Button>(R.id.bDelLimpiar)
+
+        // Botón buscar
+        btnBuscar.setOnClickListener {
+            val id = etBuscarID.text.toString().trim()
+            if (id.isNotEmpty()) {
+                buscarUsuario(id, etID, etNombre, etUser, etPassword)
+            } else {
+                Toast.makeText(requireContext(), "⚠️ Ingresa un ID", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Botón actualizar
+        btnActualizar.setOnClickListener {
+            val id = etID.text.toString()
+            val nombre = etNombre.text.toString()
+            val usuario = etUser.text.toString()
+            val contrasena = etPassword.text.toString()
+
+            if (id.isNotEmpty() && nombre.isNotEmpty() && usuario.isNotEmpty() && contrasena.isNotEmpty()) {
+                actualizarUsuario(id, nombre, usuario, contrasena)
+            } else {
+                Toast.makeText(requireContext(), "⚠️ Rellena todos los campos", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Botón limpiar manual
+        btnLimpiar.setOnClickListener {
+            limpiarCampos()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Op_editar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Op_editar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    // Función para limpiar todos los campos
+    private fun limpiarCampos() {
+        etBuscarID.setText("")
+        etID.text = ""
+        etNombre.text = ""
+        etUser.text = ""
+        etPassword.text = ""
+    }
+
+    // Función para buscar un usuario
+    private fun buscarUsuario(id: String, etID: TextView, etNombre: TextView, etUser: TextView, etPassword: TextView) {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("74.207.235.149")
+            .addPathSegment("buscar_usuario.php")
+            .addQueryParameter("id", id)
+            .build()
+
+        val request = Request.Builder().url(url).get().build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && responseBody != null) {
+                        val json = JSONObject(responseBody)
+                        if (json.optBoolean("success", false)) {
+                            val usuario = json.getJSONObject("usuario")
+                            etID.text = usuario.optString("id", "")
+                            etNombre.text = usuario.optString("nombre", "")
+                            etUser.text = usuario.optString("usuario", "")
+                            etPassword.text = usuario.optString("contrasena", "")
+                        } else {
+                            Toast.makeText(requireContext(), "❌ Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+    }
+
+    // Función para actualizar los datos de un usuario
+    private fun actualizarUsuario(id: String, nombre: String, usuario: String, contrasena: String) {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("74.207.235.149")
+            .addPathSegment("editar_usuario.php")
+            .build()
+
+        val formBody = FormBody.Builder()
+            .add("id", id)
+            .add("nombre", nombre)
+            .add("usuario", usuario)
+            .add("contrasena", contrasena)
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && responseBody != null) {
+                        val json = JSONObject(responseBody)
+                        val mensaje = json.optString("mensaje", "Sin mensaje")
+                        if (json.optBoolean("success", false)) {
+                            Toast.makeText(requireContext(), "✅ $mensaje", Toast.LENGTH_SHORT).show()
+                            limpiarCampos() // 👉 Limpiar solo si fue exitoso
+                        } else {
+                            Toast.makeText(requireContext(), "❌ $mensaje", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "❌ Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: IOException) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "❌ Error de red: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }
