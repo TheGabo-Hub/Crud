@@ -53,7 +53,7 @@ class AltaUsuario : AppCompatActivity() {
         val formBody = FormBody.Builder()
             .add("nombre", nombre)
             .add("usuario", usuario)
-            .add("password", password)
+            .add("contrasena", password)
             .build()
 
         val request = Request.Builder()
