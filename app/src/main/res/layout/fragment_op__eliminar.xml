@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-=======
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
@@ -11,31 +9,7 @@
     android:background="#CFE8FA"
     tools:context=".Op_Eliminar">
 
-<<<<<<< HEAD
-    <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="455dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="217dp" />
-=======
     <TextView
         android:id="@+id/Altas"
         android:layout_width="409dp"
@@ -56,17 +30,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="141dp" />
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:text="TextView"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="288dp" />
-=======
+
         android:text="Eliminación definitiva de usuario"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -229,6 +198,5 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
         app:layout_constraintVertical_bias="0.247" />
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
 
 </androidx.constraintlayout.widget.ConstraintLayout>

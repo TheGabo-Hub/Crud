@@ -24,10 +24,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
         var drawerLayout=findViewById<DrawerLayout>(R.id.drawellayout)
         var tollbar=findViewById<MaterialToolbar>(R.id.tollbar)
         val navigationView = findViewById<NavigationView>(R.id.navigation)
@@ -56,10 +52,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-<<<<<<< HEAD
-        }
-    }
-=======
+
     }
 }
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4

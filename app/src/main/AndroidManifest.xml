@@ -16,13 +16,6 @@
         android:theme="@style/Theme.AplicacionCrud"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
-            android:name=".Login"
-=======
-            android:name=".ContenedorActivity"
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity

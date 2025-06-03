@@ -7,18 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp">
-<<<<<<< HEAD
-=======
 
->>>>>>> 5737bf9ed80d02c838ab7f4c0520485cd91446e4
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tollbar"
