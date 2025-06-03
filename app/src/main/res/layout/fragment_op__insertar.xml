@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CFE8FA"
     tools:context=".Op_Insertar">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/Altas"
-        android:layout_width="409dp"
-        android:layout_height="53dp"
-        android:background="#84AAF0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"
         android:fontFamily="sans-serif-black"
         android:text="Altas"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,23 +39,33 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="59dp"
-        android:layout_height="23dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="48dp"
         android:text="Nombre"
+        android:textAlignment="center"
+        android:textColor="#0048FF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtNombre"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:text="Nombre" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="32dp"
         android:text="Stock"
+        android:textAlignment="center"
+        android:textColor="#0048FF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtStock"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:text="Stock" />
 
@@ -65,6 +77,8 @@
         android:layout_marginEnd="52dp"
         android:ems="10"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -76,6 +90,8 @@
         android:layout_marginEnd="52dp"
         android:ems="10"
         android:inputType="number"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
@@ -83,22 +99,30 @@
         android:id="@+id/btnregistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="#3AB7AA"
         android:text="Registrar"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnlimpiar"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecio" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
         android:text="Precio"
+        android:textAlignment="center"
+        android:textColor="#0048FF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtPrecio"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:text="Precio" />
 
@@ -110,19 +134,22 @@
         android:layout_marginEnd="52dp"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtStock" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Registrar Producto"
+        android:text="Registrar Productos"
+        android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Altas" />
 
@@ -130,10 +157,15 @@
         android:id="@+id/btnlimpiar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="44dp"
+        android:backgroundTint="#3AB7AA"
         android:text="Limpiar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/txtPrecio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

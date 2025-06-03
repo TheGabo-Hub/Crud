@@ -10,13 +10,14 @@
 
     <TextView
         android:id="@+id/Altas"
-        android:layout_width="409dp"
-        android:layout_height="53dp"
-        android:background="#84AAF0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"
         android:fontFamily="sans-serif-black"
         android:text="Editar"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +32,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Editar Producto"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Editar Productos"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,18 +66,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="257dp" />
 
-    <Button
-        android:id="@+id/bDelBuscar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1B3968"
-        android:text="BUSCAR"
-        android:textColorLink="#1D4785"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.472" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="244dp"
@@ -89,7 +80,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ID del producto"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -105,10 +98,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
+            android:enabled="false"
             android:hint="ID"
             android:inputType="number"
-            android:enabled="false" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -124,9 +119,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:hint="Nombre"
-            android:inputType="textPersonName" />
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -142,9 +139,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtStock"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:hint="Stock"
-            android:inputType="text" />
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -160,9 +159,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPrecio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:hint="Precio"
-            android:inputType="textPassword" />
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -177,15 +178,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#1B3968"
+        android:backgroundTint="#3AB7AA"
         android:text="Actualizar"
+        android:textAllCaps="true"
+        android:textColor="#000000"
         android:textColorLink="#1D4785"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bDelLimpiar"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.242" />
+
+    <Button
+        android:id="@+id/bDelBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#3AB7AA"
+        android:text="BUSCAR"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textColorLink="#1D4785"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/bDelLimpiar"
@@ -193,9 +213,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:backgroundTint="#1B3968"
+        android:backgroundTint="#3AB7AA"
         android:text="LIMPIAR"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#000000"
         android:textColorLink="#1D4785"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/guideline11"

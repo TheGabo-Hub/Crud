@@ -16,21 +16,21 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="110dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/img" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="73dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/img_1" />
 
@@ -38,13 +38,15 @@
         android:id="@+id/txtPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/txtStock" />
 
     <ImageView
@@ -80,6 +82,7 @@
         android:id="@+id/txtTextoSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="Inicio de Sesion"
         android:textSize="24sp"
@@ -93,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="126dp" />
+        app:layout_constraintGuide_begin="127dp" />
 
     <Button
         android:id="@+id/btnRegistrarse"
@@ -123,13 +126,15 @@
         android:id="@+id/txtStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

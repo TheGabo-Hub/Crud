@@ -12,13 +12,14 @@
 
     <TextView
         android:id="@+id/Altas"
-        android:layout_width="409dp"
-        android:layout_height="53dp"
-        android:background="#84AAF0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"
         android:fontFamily="sans-serif-black"
         android:text="Bajas"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,17 +34,20 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:text="Eliminación definitiva de usuario"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Eliminación de Productos"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Altas" />
+        app:layout_constraintTop_toBottomOf="@+id/Altas"
+        app:layout_constraintVertical_bias="0.448" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -70,9 +74,12 @@
         android:id="@+id/bDelBuscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#1B3968"
+        android:backgroundTint="#3AB7AA"
         android:text="BUSCAR"
-        android:textColorLink="#1D4785"
+        android:textColor="#000000"
+        android:textColorLink="#1D853A"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout"
@@ -91,7 +98,9 @@
             android:id="@+id/txtIdProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID del usuario" />
+            android:hint="ID del Producto"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +109,6 @@
         android:layout_height="58dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline9">
 
@@ -108,7 +116,9 @@
             android:id="@+id/txtID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID" />
+            android:hint="ID"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -125,7 +135,9 @@
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre" />
+            android:hint="Nombre"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -142,7 +154,9 @@
             android:id="@+id/txtStock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="User" />
+            android:hint="Stock"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -159,7 +173,9 @@
             android:id="@+id/txtPrecio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password" />
+            android:hint="Precio"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,9 +191,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#1B3968"
+        android:backgroundTint="#3AB7AA"
         android:text="ELIMINAR"
-        android:textColorLink="#1D4785"
+        android:textColor="#000000"
+        android:textColorLink="#1D853A"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bDelLimpiar"
         app:layout_constraintHorizontal_bias="0.494"
@@ -191,9 +210,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:backgroundTint="#1B3968"
+        android:backgroundTint="#3AB7AA"
         android:text="LIMPIAR"
-        android:textColorLink="#1D4785"
+        android:textColor="#000000"
+        android:textColorLink="#1D853A"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/guideline11"

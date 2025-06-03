@@ -11,30 +11,46 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="1"
-        android:gravity="center" />
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtItemNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="Gabriel"
-        android:gravity="center" />
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtItemUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="admin"
-        android:gravity="center" />
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtItemPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="1234"
-        android:gravity="center" />
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 </LinearLayout>

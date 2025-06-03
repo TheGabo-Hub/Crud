@@ -14,11 +14,13 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_background"/>
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:text="Bienvenido"/>
+        android:text="Bienvenido(a)"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

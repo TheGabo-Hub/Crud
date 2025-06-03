@@ -18,6 +18,7 @@
             android:id="@+id/tollbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             app:navigationIcon="@drawable/menu" />
     </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
