@@ -19,8 +19,8 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val etUsuario = findViewById<EditText>(R.id.txtUsuario)
-        val etContrasena = findViewById<EditText>(R.id.txtPassword)
+        val etUsuario = findViewById<EditText>(R.id.txtStock)
+        val etContrasena = findViewById<EditText>(R.id.txtPrecio)
         val btnLogin = findViewById<Button>(R.id.btnEntrar)
 
 

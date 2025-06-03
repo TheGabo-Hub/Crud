@@ -20,11 +20,11 @@ class Op_Eliminar : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_op__eliminar, container, false)
 
-        val etBuscarID = view.findViewById<EditText>(R.id.delBuscaID)
-        val txtID = view.findViewById<TextView>(R.id.delID)
-        val txtNombre = view.findViewById<TextView>(R.id.delNombre)
-        val txtUser = view.findViewById<TextView>(R.id.delUser)
-        val txtPassword = view.findViewById<TextView>(R.id.delPassword)
+        val etBuscarID = view.findViewById<EditText>(R.id.txtIdProducto)
+        val txtID = view.findViewById<TextView>(R.id.txtID)
+        val txtNombre = view.findViewById<TextView>(R.id.txtNombre)
+        val txtUser = view.findViewById<TextView>(R.id.txtStock)
+        val txtPassword = view.findViewById<TextView>(R.id.txtPrecio)
 
         val btnBuscar = view.findViewById<Button>(R.id.bDelBuscar)
         val btnEliminar = view.findViewById<Button>(R.id.bDelEliminar)

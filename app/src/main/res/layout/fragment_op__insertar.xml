@@ -52,10 +52,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="50dp"
-        android:text="Usuario"
-        app:layout_constraintEnd_toStartOf="@+id/txtUsuario"
+        android:text="Stock"
+        app:layout_constraintEnd_toStartOf="@+id/txtStock"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:text="Usuario" />
+        tools:text="Stock" />
 
     <EditText
         android:id="@+id/txtNombre"
@@ -69,13 +69,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/txtUsuario"
+        android:id="@+id/txtStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
@@ -84,9 +84,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="44dp"
         android:text="Registrar"
         app:layout_constraintEnd_toStartOf="@+id/btnlimpiar"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -96,21 +97,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="36dp"
-        android:text="Contraseña"
-        app:layout_constraintEnd_toStartOf="@+id/txtPassword"
+        android:text="Precio"
+        app:layout_constraintEnd_toStartOf="@+id/txtPrecio"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:text="Contraseña" />
+        tools:text="Precio" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtStock" />
 
     <TextView
         android:id="@+id/textView6"
@@ -118,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Registrar Usuario"
+        android:text="Registrar Producto"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -129,10 +130,10 @@
         android:id="@+id/btnlimpiar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="72dp"
         android:text="Limpiar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
